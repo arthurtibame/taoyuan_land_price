@@ -38,7 +38,7 @@ def crawler(location):
     config = configparser.ConfigParser()
     config.read(r'./price_api/price.ini')
         
-    year = [i for i in range(101,110) if i!=104]
+    year = [i for i in range(100,110) if i!=104]
     try:
         for i in tqdm(range(len(year))):
             url = config.get(str(location), str(year[i]))
@@ -46,7 +46,7 @@ def crawler(location):
             # set the offset
             offset = 0
             # set the limit
-            limit=20000
+            limit=10000
             # get total then request again to control the loop amount and loop amount = total/limit + 1
             loop_amount = res['result']['total']//limit+1        
             for j in range(loop_amount):
@@ -61,8 +61,8 @@ def crawler(location):
                 df.to_sql(str(location) ,con=con,index=False, if_exists='append')
                 #df.to_csv("{}_{}-{}.csv".format(location,str(year[i]),j),index=None)
                 offset+=10000
-    except:
-        print('something wrong')
+    except :
+        print('something wrong in : {}, {}, {}'.format(location, year[i], offset ))
     return 'finish'
         
 
