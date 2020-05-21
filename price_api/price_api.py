@@ -34,7 +34,7 @@ def requests_post(*args1, **args2):
 
 def crawler():
     #con = sqlite3.connect('D:\\python\\Chatbot\\GoBot\\shopAddress\\shop_details.db')
-    #con = sqlite3.connect('./data/data.db')
+    con = sqlite3.connect('./data/data.db')
     config = configparser.ConfigParser()
     config.read(r'./price_api/price.ini')
     locations = config.sections() # list of locations        
@@ -58,15 +58,20 @@ def crawler():
                     res = requests.get(url1).json()
                     # json to dataframe
                     all_records = res['result']['records'][:]
-                    df = pd.DataFrame(all_records)  
-                    df = df.drop(columns=['_id'])
+                    df = pd.DataFrame(all_records)
+                                       
+    
+                    #print(df2)
+                    df = df.drop(columns=['_id','公告地價'])
                     df.insert(0,'年份', [year[k]]*len(df))
-                    #df.to_sql(str(location) ,con=con,index=False, if_exists='append')
-                    df.to_csv("{}.csv".format(locations[i]),index=None,mode='a', header=False)
-                    
+                   
+                    #print(df)
+                    #df.to_sql(str(locations[i]) ,con=con,index=False, if_exists='append')
+                    df.to_csv("{}_{}.csv".format(locations[i],year[k]),index=None,mode='a', header=False)
+                    #df2.to_csv("{}_{}.csv".format(locations[0],"公告地價"),index=None,mode='a', header=False)
                     offset+=10000
     except :
-        print('something wrong in : {}, {}, {}'.format(locations[i], year[j], offset ))
+        print('something wrong in : {}, {}, {}'.format(locations[i], year[k], offset ))
     return 'finish'
         
 
