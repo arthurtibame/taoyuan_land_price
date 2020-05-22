@@ -64,14 +64,17 @@ def crawler():
                                                 
 #                    #print(df2)
                 
-                df = df.drop(columns=['_id'])
-                df.insert(0,'年份', [year[k]]*len(df))
+                df = df.drop([0,1])
                 
-                #print(df)
+                df.insert(1,'district', [locations[i]]*len(df))
+                df.insert(0,'年份', [year[k]]*len(df))
+                df = df.drop(columns=['_id','﻿行政區'])
+                
+                print(df)
                 #df.to_sql(str(locations[i]) ,con=con,index=False, if_exists='append')
-                df.to_csv("{}_{}.csv".format(locations[i],year[k]),index=None)
-
-                df = pd.read_csv("{}_{}.csv".format(locations[i],year[k]))
+                #df.to_csv("{}_{}.csv".format(locations[i],year[k]),index=None)
+                df.to_csv("{}.csv".format(locations[i]),index=None)
+                df = pd.read_csv("{}.csv".format(locations[i]))
                 new_df=df.to_dict('records')
                 data2mongo(locations[i],new_df)
          
