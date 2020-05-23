@@ -68,7 +68,7 @@ def crawler():
                 
                 df.insert(1,'district', [locations[i]]*len(df))
                 df.insert(0,'年份', [year[k]]*len(df))
-                df = df.drop(columns=['_id','﻿行政區'])
+                df = df.drop(columns=['_id'])
                 
                 print(df)
                 #df.to_sql(str(locations[i]) ,con=con,index=False, if_exists='append')
