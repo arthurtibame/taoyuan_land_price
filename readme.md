@@ -14,3 +14,14 @@
 | ..........					|   	|
 | ..........					|   	|
 
+## mongodb 欄位翻譯
+
+|		中文			 		|			英文		   |
+|---------------------------|----------------------|
+|announced_land_price		|  		公告地價	   	   |
+|announced_present_value    |		公告現值		   |
+|area 						|		  面積		   |
+|district					|		 行政區		   |
+|land_number 				|		  地號 		   |
+|section 					| 		 段小段		   |
+|section1					|		  段別 		   |
